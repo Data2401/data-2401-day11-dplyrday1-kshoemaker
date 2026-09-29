@@ -51,27 +51,27 @@ starwars |>
 ## DO NOT CHANGE THE TASKS, CHANGE THE ORDER ##
 
 starwars |> 
-  arrange(-mass) |> 
+  arrange(mass) |> 
   mutate(height_m = height / 100) |> 
   filter(species == "Human") |> 
   select(name, homeworld, species)
 
 
 # Answer should be: 
-#   # A tibble: 35 × 3
-#   name              homeworld  species
-# <chr>             <chr>      <chr>  
-#   1 Darth Vader       Tatooine   Human  
-# 2 Owen Lars         Tatooine   Human  
-# 3 Qui-Gon Jinn      NA         Human  
-# 4 Biggs Darklighter Tatooine   Human  
-# 5 Anakin Skywalker  Tatooine   Human  
-# 6 Mace Windu        Haruun Kal Human  
-# 7 Han Solo          Corellia   Human  
-# 8 Dooku             Serenno    Human  
-# 9 Lando Calrissian  Socorro    Human  
-# 10 Lobot             Bespin     Human 
-# ...
+# # A tibble: 35 × 3
+# name               homeworld species
+# <chr>              <chr>     <chr>  
+#   1 Padmé Amidala      Naboo     Human  
+# 2 Leia Organa        Alderaan  Human  
+# 3 Beru Whitesun Lars Tatooine  Human  
+# 4 Palpatine          Naboo     Human  
+# 5 Luke Skywalker     Tatooine  Human  
+# 6 Obi-Wan Kenobi     Stewjon   Human  
+# 7 Wedge Antilles     Corellia  Human  
+# 8 Boba Fett          Kamino    Human  
+# 9 Lando Calrissian   Socorro   Human  
+# 10 Lobot              Bespin    Human  
+# # ℹ 25 more rows
 
 # --------------------------------------------------
 # Reflection Questions:

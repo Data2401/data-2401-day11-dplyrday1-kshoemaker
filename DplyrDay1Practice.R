@@ -8,6 +8,7 @@ library(dplyr)
 
 ## if you want to look at the metadata, run:
 help(starwars)
+data("starwars")
 
 # --------------------------------------------------
 # TOGETHER
@@ -24,7 +25,11 @@ help(starwars)
 # ARRANGE
 # Sort by bmi, highest first.
 
-
+starwars |> 
+  select(name, height, mass, species, homeworld)  |> 
+  filter(height > 180) |> 
+  mutate(bmi = mass / (height/100)^2) |> 
+  arrange(-bmi)
 
 
 # --------------------------------------------------
@@ -40,9 +45,33 @@ help(starwars)
 # ARRANGE:
 # Sort by mass, lowest first.
 
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## DO NOT CHANGE THE TASKS, CHANGE THE ORDER ##
+
+starwars |> 
+  arrange(-mass) |> 
+  mutate(height_m = height / 100) |> 
+  filter(species == "Human") |> 
+  select(name, homeworld, species)
 
 
-
+# Answer should be: 
+#   # A tibble: 35 × 3
+#   name              homeworld  species
+# <chr>             <chr>      <chr>  
+#   1 Darth Vader       Tatooine   Human  
+# 2 Owen Lars         Tatooine   Human  
+# 3 Qui-Gon Jinn      NA         Human  
+# 4 Biggs Darklighter Tatooine   Human  
+# 5 Anakin Skywalker  Tatooine   Human  
+# 6 Mace Windu        Haruun Kal Human  
+# 7 Han Solo          Corellia   Human  
+# 8 Dooku             Serenno    Human  
+# 9 Lando Calrissian  Socorro    Human  
+# 10 Lobot             Bespin     Human 
+# ...
 
 # --------------------------------------------------
 # Reflection Questions:

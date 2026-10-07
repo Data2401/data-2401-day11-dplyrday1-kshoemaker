@@ -55,7 +55,7 @@ starwars |>
   arrange(mass) |> 
   mutate(height_m = height / 100) |> 
   filter(species == "Human") |> 
-  select(name, homeworld, species) -> starwars_q2
+  select(name, homeworld, species) 
 
 starwars_q2
 
@@ -85,17 +85,19 @@ starwars_q2
 # d) Does the character with the highest BMI surprise you? Why or why not?
 
 # a
-starwars_q1 |> filter(height > 180) |> slice_max(bmi)
+starwars_q1 |>  slice_max(bmi)
 ## IG-88
 
 # b 
-starwars |> filter(species == "Human") |> slice_max(height) |> select(name)
+starwars |> 
+  mutate(height_m = height / 100) |> 
+  filter(species == "Human") |> 
+  slice_max(height)
 ## Darth Vader
 
 # c  (note we need day 2 to do this smoothly)
-starwars |> filter(height > 180) |> count(homeworld) |> arrange(-n)
+starwars_q1 |> count(homeworld) |> arrange(-n)
 ## Naboo
 
 # d 
-starwars_q1 |> slice_max(bmi)
 ## IG-88 - is a droid, seems like a heavy thing to be, but also I don't know who this character is! 

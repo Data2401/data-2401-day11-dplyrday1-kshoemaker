@@ -29,8 +29,9 @@ starwars |>
   select(name, height, mass, species, homeworld)  |> 
   filter(height > 180) |> 
   mutate(bmi = mass / (height/100)^2) |> 
-  arrange(-bmi)
+  arrange(-bmi) -> starwars_q1
 
+starwars_q1
 
 # --------------------------------------------------
 # ON YOUR OWN
@@ -54,8 +55,9 @@ starwars |>
   arrange(mass) |> 
   mutate(height_m = height / 100) |> 
   filter(species == "Human") |> 
-  select(name, homeworld, species)
+  select(name, homeworld, species) -> starwars_q2
 
+starwars_q2
 
 # Answer should be: 
 # # A tibble: 35 × 3
@@ -81,3 +83,19 @@ starwars |>
 # b) Who is the tallest human character in the dataset?
 # c) Which homeworld has the most characters taller than 180 cm?
 # d) Does the character with the highest BMI surprise you? Why or why not?
+
+# a
+starwars_q1 |> filter(height > 180) |> slice_max(bmi)
+## IG-88
+
+# b 
+starwars |> filter(species == "Human") |> slice_max(height) |> select(name)
+## Darth Vader
+
+# c  (note we need day 2 to do this smoothly)
+starwars |> filter(height > 180) |> count(homeworld) |> arrange(-n)
+## Naboo
+
+# d 
+starwars_q1 |> slice_max(bmi)
+## IG-88 - is a droid, seems like a heavy thing to be, but also I don't know who this character is! 

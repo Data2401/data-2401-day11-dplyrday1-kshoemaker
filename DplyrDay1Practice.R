@@ -8,6 +8,7 @@ library(dplyr)
 
 ## if you want to look at the metadata, run:
 help(starwars)
+data("starwars")
 
 # --------------------------------------------------
 # TOGETHER
@@ -24,8 +25,13 @@ help(starwars)
 # ARRANGE
 # Sort by bmi, highest first.
 
+starwars |> 
+  select(name, height, mass, species, homeworld)  |> 
+  filter(height > 180) |> 
+  mutate(bmi = mass / (height/100)^2) |> 
+  arrange(-bmi) -> starwars_q1
 
-
+starwars_q1
 
 # --------------------------------------------------
 # ON YOUR OWN
@@ -40,9 +46,34 @@ help(starwars)
 # ARRANGE:
 # Sort by mass, lowest first.
 
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## YOU CANNOT DO THESE IN THE ORDER I GAVE THEM TO YOU ##
+## DO NOT CHANGE THE TASKS, CHANGE THE ORDER ##
 
+starwars |> 
+  arrange(mass) |> 
+  mutate(height_m = height / 100) |> 
+  filter(species == "Human") |> 
+  select(name, homeworld, species) -> starwars_q2
 
+starwars_q2
 
+# Answer should be: 
+# # A tibble: 35 × 3
+# name               homeworld species
+# <chr>              <chr>     <chr>  
+#   1 Padmé Amidala      Naboo     Human  
+# 2 Leia Organa        Alderaan  Human  
+# 3 Beru Whitesun Lars Tatooine  Human  
+# 4 Palpatine          Naboo     Human  
+# 5 Luke Skywalker     Tatooine  Human  
+# 6 Obi-Wan Kenobi     Stewjon   Human  
+# 7 Wedge Antilles     Corellia  Human  
+# 8 Boba Fett          Kamino    Human  
+# 9 Lando Calrissian   Socorro   Human  
+# 10 Lobot              Bespin    Human  
+# # ℹ 25 more rows
 
 # --------------------------------------------------
 # Reflection Questions:
@@ -52,3 +83,19 @@ help(starwars)
 # b) Who is the tallest human character in the dataset?
 # c) Which homeworld has the most characters taller than 180 cm?
 # d) Does the character with the highest BMI surprise you? Why or why not?
+
+# a
+starwars_q1 |> filter(height > 180) |> slice_max(bmi)
+## IG-88
+
+# b 
+starwars |> filter(species == "Human") |> slice_max(height) |> select(name)
+## Darth Vader
+
+# c  (note we need day 2 to do this smoothly)
+starwars |> filter(height > 180) |> count(homeworld) |> arrange(-n)
+## Naboo
+
+# d 
+starwars_q1 |> slice_max(bmi)
+## IG-88 - is a droid, seems like a heavy thing to be, but also I don't know who this character is! 
